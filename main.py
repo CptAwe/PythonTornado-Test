@@ -1,16 +1,15 @@
+from tornado.options import options
 import tornado.ioloop
 import tornado.web
 
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world")
+from app import make_app
+from logger import show
+import settings
 
-def make_app():
-    return tornado.web.Application([
-        (r"/", MainHandler),
-    ])
 
 if __name__ == "__main__":
+
     app = make_app()
-    app.listen(8888)
+    app.listen(settings._PORT)
+    show("Im' listening on %s"%(settings._PORT))
     tornado.ioloop.IOLoop.current().start()
