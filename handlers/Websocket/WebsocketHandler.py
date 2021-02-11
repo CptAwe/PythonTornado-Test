@@ -1,16 +1,27 @@
 from tornado.websocket import WebSocketHandler
+from modules.Users.user import WsUser
+from modules.uuid import uuidManager
+
+uuidMng = uuidManager()
 
 class WSHandler(WebSocketHandler):
-    clients = []
+    clientPool = None
+    user = WsUser()
+
+    def __init__(self, application, request, **kwargs):
+        self.clientPool = kwargs.pop("users")
+        super().__init__(application, request, **kwargs)
 
     def open(self):
-        self.clients.append(self)
-        print('new connection')
-        self.write_message("Hello World")
+        self.user.id = uuidMng.generate()
+        self.user.socketHandler = self
+        self.clientPool.addUser(self.user)
+        print('new connection %s'%self.user.id)
+        self.write_message("Hello %s"%self.user.id)
 
     def on_message(self, message):
-        print('message received %s' % message)
+        print('%s: %s'%(self.user.id, message))
 
     def on_close(self):
-        self.clients.remove(self)
-        print('closed connection')
+        self.clientPool.removeUser(self.user)
+        print('closed connection %s'%self.user.id)

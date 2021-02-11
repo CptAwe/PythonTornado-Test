@@ -1,0 +1,10 @@
+body {
+    padding: 10px;
+}
+
+textarea {
+    background-color: aliceblue;
+    width: 500px;
+    height: 400px;
+}
+
