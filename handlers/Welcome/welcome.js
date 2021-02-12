@@ -4,7 +4,10 @@ $( function() {
 
     $("#btn-send").on("click", function(e) {
         e.preventDefault();
-        console.log($("input[type=text]").val());
+        let message = $("input[type=text]").val();
+        console.log(message);
+        webSocket.send(message);
+        Print_sent(message);
     });
 
 });

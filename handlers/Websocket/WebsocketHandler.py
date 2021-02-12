@@ -16,7 +16,7 @@ class WSHandler(WebSocketHandler):
         self.user.id = uuidMng.generate()
         self.user.socketHandler = self
         self.clientPool.addUser(self.user)
-        print('new connection %s'%self.user.id)
+        print('new connection <%s>'%self.user.id)
         self.write_message("Hello %s"%self.user.id)
 
     def on_message(self, message):
@@ -24,4 +24,4 @@ class WSHandler(WebSocketHandler):
 
     def on_close(self):
         self.clientPool.removeUser(self.user)
-        print('closed connection %s'%self.user.id)
+        print('closed connection <%s>'%self.user.id)
