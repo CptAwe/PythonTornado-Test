@@ -16,7 +16,7 @@ function Print_sent(message) {
     );
 }
 
-let url = "ws://localhost:8888/start";
+let url = "ws://localhost:8888/adminWS";
 webSocket = new WebSocket(url);
 
 function wsSetup() {
