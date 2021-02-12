@@ -1,6 +1,6 @@
-import os
-
 from tornado.web import Application, StaticFileHandler
+
+from settings import *
 
 from handlers.Welcome.WelcomeHandler import Welcome
 from handlers.Admin.ControlPanel.ControlPanelHandler import ControlPanel 
@@ -11,20 +11,16 @@ from modules.UsersManager import WsUserMng
 
 userPool = WsUserMng()
 
-settings = {
-    "static_path" : os.path.join(os.path.dirname(__file__), "static"),
-}
-
 handlers = [
     (r"/", Welcome),
     (r"/clientWS", WSHandler, {'users': userPool}),
     (r"/adminWS", AdminWSHandler, {'users': userPool}),
     (r"/admin", ControlPanel),
-    (r"/static/(.*)", StaticFileHandler, {"path" : settings["static_path"]}),
+    (r"/static/(.*)", StaticFileHandler, {"path" : SETTINGS["static_path"]}),
 ]
 
 def make_app():
     return Application(
         handlers,
-        **settings
+        **SETTINGS
     )
