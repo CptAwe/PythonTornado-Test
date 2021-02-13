@@ -22,7 +22,12 @@ webSocket = new WebSocket(url);
 function wsSetup() {
 
     webSocket.onopen = function (event) {
-        webSocket.send("connection established");
+        webSocket.send(
+            JSON.stringify({
+                to : "-1",
+                message : "connection established"
+            })
+        );
         Print_sent("connection established");
     }
 
