@@ -23,12 +23,25 @@
 
         <div class="d-flex flex-column align-content-center align-items-center justify-content-center">
             <h1>Hello Admin</h1>
-            <!-- <textarea id="ms-output" readonly></textarea>
-            <div class="d-flex flex-row w-100">
-                <input type="text">
-                <a id="btn-send" class="btn btn-primary" href="#" role="button">Link</a>
-
-            </div> -->
+            <textarea id="ms-output" readonly></textarea>
+            <form class="d-flex flex-row w-100 justify-content-between">
+                <input class="" type="text" placeholder="ping" readonly>
+                <div class="flex-fill"></div>
+                <div class="dropdown me-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="user-dropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Select User
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="user-dropdown">
+                        <li><a class="dropdown-item" href="#">ALL</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                    </ul>
+                </div>
+                <button id="btn-send" class="btn btn-primary disabled" type="submit">Send</button>
+            </form>
         </div>
 
     </div>
