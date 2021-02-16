@@ -35,9 +35,11 @@
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="user-dropdown">
                         <li><a class="dropdown-item" href="#">ALL</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        {% for tag in tags %}
+                            <li><a class="dropdown-item" href="#">{{ escape(tag) }}</a></li>
+                        {% end %}
+                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li> -->
                     </ul>
                 </div>
                 <button id="btn-send" class="btn btn-primary disabled" type="submit">Send</button>

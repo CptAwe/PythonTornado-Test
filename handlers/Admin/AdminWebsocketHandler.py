@@ -2,18 +2,18 @@ from tornado.websocket import WebSocketHandler
 
 import json
 
-from modules.UsersManager import WsUserMng
+# from modules.UsersManager import WsUserMng
 from handlers.Admin.Admin import AdminMng
 from modules.Messenger.messagesManager import messagesMng
 
 
 class AdminWSHandler(WebSocketHandler):
-    clientPool: WsUserMng = None
+    # clientPool: WsUserMng = None
     messenger: messagesMng = None
     admin: AdminMng = None
 
     def __init__(self, application, request, **kwargs):
-        self.clientPool = kwargs.pop("users")
+        # self.clientPool = kwargs.pop("users")
         self.admin = AdminMng(self)
         self.messenger = messagesMng(self.admin)
 
@@ -26,7 +26,12 @@ class AdminWSHandler(WebSocketHandler):
     def on_message(self, message):
         message = json.loads(message)
         print('admin: %s' % (message))
-        self.messenger.sendMessage(self.clientPool.clients, message["message"])
+        recipient = message["to"]
+        # if recipient == AdminMng.tag:
+        #     recipient = AdminMng
+        # else:
+        #     recipient = self.clientPool.clientsWith(recipient)
+        self.messenger.sendMessage(recipient, message["message"])
 
     def on_close(self):
         print('closed connection with admin')

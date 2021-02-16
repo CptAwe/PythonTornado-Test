@@ -9,6 +9,7 @@ uuidMng = uuidManager()
 class WSHandler(WebSocketHandler):
     clientPool : WsUserMng = None
     user : WsUser = None
+    __welcome_message = '''Hello user! You are <{id}> with the \"{tag}\" tag'''
 
     def __init__(self, application, request, **kwargs):
         self.clientPool = kwargs.pop("users")
@@ -17,8 +18,8 @@ class WSHandler(WebSocketHandler):
     def open(self):
         self.user = WsUser(uuidMng.generate(), self)
         self.clientPool.addUser(self.user)
-        print('new connection <%s>'%self.user.id)
-        self.write_message("Hello %s"%self.user.id)
+        print('new connection <%s>'%self.user)
+        self.write_message(self.__welcome_message.format(id = self.user.id, tag = self.user.tag))
 
     def on_message(self, message):
         print('%s: %s'%(self.user.id, message))
